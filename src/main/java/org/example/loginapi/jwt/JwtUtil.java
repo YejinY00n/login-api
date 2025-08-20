@@ -51,7 +51,7 @@ public class JwtUtil {
 			.setHeaderParam("typ", "JWT")                       // 헤더 설정
 			.setIssuedAt(now)                                       // 발행 시간
 			.setExpiration(exp)                             // 토큰 만료기한 (발급 일시 + TOKEN_TIME)
-			.claim("roles", role)                        // Private Claims (Key-Value)
+			.claim("roles", role.toString())                        // Private Claims (Key-Value)
 			.signWith(key, signatureAlgorithm)            // 서명 (사용 알고리즘, 서명 생성-검증 용 비밀 키)
 			.compact();
 	}
