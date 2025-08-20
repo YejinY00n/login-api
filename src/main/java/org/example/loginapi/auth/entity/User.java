@@ -17,7 +17,7 @@ import org.example.loginapi.auth.enums.UserRole;
 
 @Entity
 @Getter
-@Table(name="users")
+@Table(name = "users")
 @NoArgsConstructor
 public class User {
 	@Id
@@ -36,10 +36,14 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	public User (SignupRequestDto dto) {
+	public User(SignupRequestDto dto) {
 		this.username = dto.getUsername();
 		this.password = dto.getPassword();
 		this.nickname = dto.getNickname();
 		this.role = UserRole.USER;
+	}
+
+	public void updateRole(UserRole role) {
+		this.role = role;
 	}
 }
