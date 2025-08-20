@@ -8,7 +8,7 @@ import org.example.loginapi.auth.entity.User;
 import org.example.loginapi.auth.enums.UserRole;
 import org.example.loginapi.auth.repository.UserRepository;
 import org.example.loginapi.common.exception.ErrorCode;
-import org.example.loginapi.jwt.JwtUtil;
+import org.example.loginapi.common.security.jwt.JwtUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

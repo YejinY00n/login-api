@@ -2,8 +2,8 @@ package org.example.loginapi.common.config;
 
 import lombok.RequiredArgsConstructor;
 
-import org.example.loginapi.jwt.JwtFilter;
-import org.example.loginapi.jwt.JwtUtil;
+import org.example.loginapi.common.security.jwt.JwtFilter;
+import org.example.loginapi.common.security.jwt.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

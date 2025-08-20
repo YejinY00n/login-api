@@ -1,4 +1,4 @@
-package org.example.loginapi.jwt;
+package org.example.loginapi.common.security.jwt;
 
 import static org.example.loginapi.common.exception.ErrorCode.INVALID_TOKEN;
 

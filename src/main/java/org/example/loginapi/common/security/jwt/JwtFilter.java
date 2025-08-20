@@ -1,4 +1,4 @@
-package org.example.loginapi.jwt;
+package org.example.loginapi.common.security.jwt;
 
 import java.io.IOException;
 import java.io.PrintWriter;
