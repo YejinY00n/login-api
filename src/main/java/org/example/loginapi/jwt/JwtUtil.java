@@ -41,7 +41,7 @@ public class JwtUtil {
 	}
 
 	// 토큰 발급
-	public String createToken(Long userId, String email, UserRole role) {
+	public String createToken(Long userId, UserRole role) {
 		// 페이로드
 		Date now = new Date();
 		Date exp = new Date(now.getTime() + TOKEN_TIME);

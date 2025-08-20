@@ -29,7 +29,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	// 로그인 필터 제외 대상 URL
 	private static final List<String> WHITE_LIST = List.of(
-		"/signup"
+		"/signup",
+		"/login"
 	);
 
 	@Override
@@ -39,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// WHITE_LIST 는 필터 적용 제외
 		for (String matcher : WHITE_LIST) {
-			if (url.startsWith(matcher)) {
+			if (pathMatcher.match(matcher, url)) {
 				filterChain.doFilter(request, response);
 				return;
 			}

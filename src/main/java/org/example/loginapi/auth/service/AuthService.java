@@ -10,12 +10,14 @@ import org.example.loginapi.auth.entity.User;
 import org.example.loginapi.auth.repository.UserRepository;
 import org.example.loginapi.common.exception.CustomException;
 import org.example.loginapi.common.exception.ErrorCode;
+import org.example.loginapi.jwt.JwtUtil;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 	private final UserRepository userRepository;
+	private final JwtUtil jwtUtil;
 
 	// 회원 가입
 	public SignupResponseDto signup(SignupRequestDto requestDto) {
@@ -32,9 +34,12 @@ public class AuthService {
 		User user = userRepository.findByUsername(requestDto.getUsername())
 			.orElseThrow(() -> new CustomException(ErrorCode.INVALID_CREDENTIALS));
 
-		// 패스워드 검증 --> 예외 던지기
+		// 패스워드 검증
+		if (!user.getPassword().equals(requestDto.getPassword())) {
+			throw new CustomException(ErrorCode.INVALID_CREDENTIALS);
+		}
 
 		// 토큰 생성
-		return new LoginResponseDto("token");
+		return new LoginResponseDto(jwtUtil.createToken(user.getId(), user.getRole()));
 	}
 }
