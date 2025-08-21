@@ -39,7 +39,9 @@ public class JwtFilter extends OncePerRequestFilter {
 	// 로그인 필터 제외 대상 URL
 	private static final List<String> WHITE_LIST = List.of(
 		"/signup",
-		"/login"
+		"/login",
+		"/h2-console/**",
+		"/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
 	);
 
 	// Admin 권한 URL
@@ -65,6 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
 		// 토큰이 비어있다면
 		if (bearerToken == null) {
 			filterErrorResponse(response, ErrorCode.INVALID_TOKEN);
+			return;
 		}
 
 		// 유효한 토큰인지 검사
@@ -90,6 +93,7 @@ public class JwtFilter extends OncePerRequestFilter {
 					// 만약 유저 role 이 일반 사용자(USER)라면
 					if (!UserRole.ADMIN.equals(role)) {
 						filterErrorResponse(response, ErrorCode.ACCESS_DENIED);
+						return;
 					}
 				}
 			}
