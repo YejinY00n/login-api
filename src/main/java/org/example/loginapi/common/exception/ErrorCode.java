@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Getter
 @AllArgsConstructor
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
@@ -21,6 +23,10 @@ public enum ErrorCode {
 
 	@JsonIgnore
 	private final HttpStatus status;        // json 직렬화 제외
+
+	@Schema
 	private final String code;
+
+	@Schema
 	private final String message;
 }
