@@ -109,5 +109,30 @@ class AdminControllerTest {
 				.andExpect(jsonPath("$.error.code").value(ErrorCode.USER_NOT_FOUND.getCode()))
 				.andExpect(jsonPath("$.error.message").value(ErrorCode.USER_NOT_FOUND.getMessage()));
 		}
+
+		@Test
+		@DisplayName("관리자 권한 부여 실패 - 토큰 없이 요청")
+		void requestWithoutToken() throws Exception {
+			// given
+
+			// when & then
+			mockMvc.perform(patch("/admin/users/{userId}/roles", USER.getId()))
+				.andExpect(status().isUnauthorized())
+				.andExpect(jsonPath("$.error.code").value(ErrorCode.INVALID_TOKEN.getCode()))
+				.andExpect(jsonPath("$.error.message").value(ErrorCode.INVALID_TOKEN.getMessage()));
+		}
+
+		@Test
+		@DisplayName("관리자 권한 부여 실패 - 잘못된 형식의 토큰")
+		void requestWithInvalidTokenFormat() throws Exception {
+			// given
+
+			// when & then
+			mockMvc.perform(patch("/admin/users/{userId}/roles", USER.getId())
+					.header("Authorization", "Bearer BAD_TOKEN"))
+				.andExpect(status().isUnauthorized())
+				.andExpect(jsonPath("$.error.code").value(ErrorCode.INVALID_TOKEN.getCode()))
+				.andExpect(jsonPath("$.error.message").value(ErrorCode.INVALID_TOKEN.getMessage()));
+		}
 	}
 }
